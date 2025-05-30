@@ -317,15 +317,92 @@ header {
     padding: 1rem var(--spacing-sm);
 }
 
-.logo h1 {
-    font-size: 2.8rem;
-    color: var(--white);
-    margin-bottom: 0;
-    transition: color var(--transition-medium);
+.logo {
+    display: flex;
+    align-items: center;
+    padding: 0.6rem 0;
+    margin-right: 2rem;
+    position: relative;
 }
 
-.navbar.scrolled .logo h1 {
-    color: var(--primary-color);
+.logo-img {
+    height: 54px;
+    width: auto;
+    max-width: 100%;
+    transition: transform 0.3s ease, filter 0.3s ease;
+    filter: brightness(1.5) contrast(1.2) drop-shadow(0 3px 6px rgba(0, 0, 0, 0.25));
+    object-fit: contain;
+    border-radius: 8px;
+    padding: 3px;
+    background-color: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(5px);
+    transform-origin: center;
+    will-change: transform, filter;
+}
+
+.logo a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3px;
+    border-radius: 8px;
+    transition: all var(--transition-medium);
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
+    will-change: transform;
+}
+
+.logo a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, rgba(52, 152, 219, 0.1), transparent);
+    opacity: 0;
+    transition: opacity var(--transition-medium);
+    z-index: -1;
+    border-radius: 8px;
+}
+
+.logo a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--secondary-color);
+    transition: width var(--transition-medium), transform var(--transition-medium);
+    transform-origin: left;
+}
+
+.logo a:hover::before {
+    opacity: 1;
+}
+
+.logo a:hover::after {
+    width: 100%;
+    transform: scaleX(1);
+}
+
+.logo a:hover .logo-img {
+    transform: scale(1.1) translateY(-3px);
+    filter: brightness(1.6) contrast(1.25) drop-shadow(0 6px 18px rgba(0, 0, 0, 0.35));
+}
+
+.logo a:active .logo-img {
+    transform: scale(0.95);
+    transition: transform 0.1s;
+}
+
+.navbar.scrolled .logo-img {
+    height: 48px;
+    filter: brightness(1.3) contrast(1.15) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+    background-color: transparent;
+    padding: 2px;
 }
 
 .nav-menu {
@@ -786,10 +863,73 @@ footer {
     margin-bottom: var(--spacing-lg);
 }
 
-.footer-logo h2 {
-    color: var(--white);
-    font-size: 3rem;
+.footer-logo-img {
+    height: 68px;
+    width: auto;
+    max-width: 100%;
     margin-bottom: var(--spacing-sm);
+    filter: brightness(1.6) contrast(1.25) drop-shadow(0 4px 10px rgba(0, 0, 0, 0.35));
+    transition: transform 0.3s ease, filter 0.3s ease;
+    object-fit: contain;
+    border-radius: 10px;
+    padding: 5px;
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(6px);
+    transform-origin: center;
+    will-change: transform, filter;
+}
+
+.footer-logo {
+    position: relative;
+    display: inline-block;
+    padding: 3px;
+    border-radius: 10px;
+    transition: transform var(--transition-medium);
+    will-change: transform;
+}
+
+.footer-logo::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, rgba(52, 152, 219, 0.15), transparent 70%);
+    opacity: 0;
+    transition: opacity var(--transition-medium);
+    border-radius: 8px;
+    z-index: 0;
+}
+
+.footer-logo::after {
+    content: '';
+    position: absolute;
+    bottom: var(--spacing-sm);
+    left: 0;
+    width: 0;
+    height: 3px;
+    background-color: var(--secondary-color);
+    transition: width var(--transition-slow), background-color var(--transition-medium);
+    z-index: 1;
+}
+
+.footer-logo:hover {
+    transform: translateY(-2px);
+}
+
+.footer-logo:hover::before {
+    opacity: 1;
+}
+
+.footer-logo:hover::after {
+    width: 80px;
+    background-color: var(--secondary-light);
+}
+
+.footer-logo-img:hover {
+    transform: scale(1.12) translateY(-3px);
+    filter: brightness(1.8) contrast(1.3) drop-shadow(0 10px 25px rgba(0, 0, 0, 0.4));
 }
 
 .footer-logo p {
@@ -961,6 +1101,35 @@ footer {
         padding: 1.5rem var(--spacing-sm);
     }
     
+    .logo {
+        margin-right: 0;
+        padding: 0;
+    }
+    
+    .logo-img {
+        height: 44px;
+        padding: 2px;
+        filter: brightness(1.4) contrast(1.15) drop-shadow(0 2px 5px rgba(0, 0, 0, 0.2));
+        background-color: rgba(255, 255, 255, 0.05);
+        border-radius: 6px;
+        transition: transform 0.25s ease, filter 0.25s ease;
+    }
+    
+    .navbar.scrolled .logo-img {
+        height: 40px;
+        filter: brightness(1.3) contrast(1.1) drop-shadow(0 1px 4px rgba(0, 0, 0, 0.18));
+    }
+    
+    .logo a::before,
+    .logo a::after {
+        display: none;
+    }
+    
+    .logo a:hover .logo-img {
+        transform: scale(1.08);
+        filter: brightness(1.5) contrast(1.2) drop-shadow(0 3px 8px rgba(0, 0, 0, 0.25));
+    }
+    
     .logo h1 {
         font-size: 2.4rem;
     }
@@ -1059,6 +1228,47 @@ footer {
     .hero-content h1 {
         font-size: 3.6rem;
     }
+    
+    .logo-img {
+        height: 38px;
+        padding: 2px;
+        filter: brightness(1.35) contrast(1.12) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.18));
+        background-color: rgba(255, 255, 255, 0.05);
+        border-radius: 5px;
+    }
+    
+    .navbar.scrolled .logo-img {
+        height: 34px;
+        filter: brightness(1.25) contrast(1.08) drop-shadow(0 1px 3px rgba(0, 0, 0, 0.15));
+    }
+    
+    .footer-logo-img {
+        height: 54px;
+        padding: 3px;
+        filter: brightness(1.4) contrast(1.15) drop-shadow(0 3px 8px rgba(0, 0, 0, 0.25));
+        background-color: rgba(255, 255, 255, 0.08);
+        border-radius: 7px;
+        transition: transform 0.25s ease, filter 0.25s ease;
+    }
+    
+    .footer-logo::before {
+        display: none;
+    }
+    
+    .footer-logo::after {
+        bottom: var(--spacing-xs);
+        height: 2px;
+    }
+    
+    .footer-logo:hover::after {
+        width: 50px;
+    }
+    
+    .footer-logo-img:hover {
+        transform: scale(1.08);
+        filter: brightness(1.5) contrast(1.2) drop-shadow(0 5px 12px rgba(0, 0, 0, 0.3));
+    }
+}
     
     .hero-buttons {
         flex-direction: column;
